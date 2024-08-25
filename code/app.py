@@ -1,7 +1,7 @@
 # --------------------------------------------
 
-# NAME / ROLL NUMBER
-# AMOGH ANSHU N      22F1001411
+# ROLL NUMBER
+# 22F1001411
 
 # --------------------------------------------
 
@@ -11,8 +11,8 @@
 
 # ----------------------------------------------
 
-# MUSIC STREAMING APPLICATION
-
+# MUSIC STREAMING APPLICATION v1
+# Current students or prospective students of IITM BS please do not use this code for projects to avoid plagarism 
 
 from flask import Flask, session, redirect, url_for, Response
 
