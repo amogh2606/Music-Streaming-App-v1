@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Administrator</span>
+      </a>
+
+              <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post">
+            <span class="input-group-text" id="basic-addon1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+</svg>
+
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search" name="search" value="{{search}}">
+                 </span>
+        </form>
+
+      <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/admin/creators" class="btn btn-outline-primary" aria-current="page">Creators</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+          <li class="nav-item"><a href="/admin/users" class="btn btn-outline-primary" aria-current="page">Users</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/dashboard" class="btn btn-outline-primary" aria-current="page">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/albums" class="btn btn-outline-primary">Albums</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/logout" class="btn btn-danger">Logout</a></li>
+
+      </ul>
+    </header>
+  </div>
+{% if songs%}
+<div class="box" style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+  <div class="row">
+    <div class="col-md-4">
+  <h1>Songs</h1>
+    </div>
+
+</div>
+ {% for song in songs %}
+<div class="box" style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px ;margin-bottom: 10px">
+  <div class="row">
+    <div class="col-md-4">
+      <h3> {{ song.song_name }}</h3>
+    </div>
+    <div class="col-md-4 offset-md-4">
+      <a type="button" href="/song/{{ song.song_id }}" class="btn btn-outline-primary" >View Song</a>
+<!--      <a type="button" class="btn btn-outline-primary" >Play</a>-->
+        <a type="button" href="/admin/song/delete/{{ song.song_id }}" class="btn btn-outline-danger" >Delete</a>
+
+    </div>
+  </div>
+  </div>
+
+ {% endfor %}
+</div>
+{% endif %}
+</br>
+{% if albums %}
+<div class="box" style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+  <div class="row">
+    <div class="col-md-4">
+  <h1>Albums</h1>
+    </div>
+
+</div>
+ {% for album in albums %}
+<div class="box" style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px ; margin-bottom: 10px">
+  <div class="row">
+    <div class="col-md-4">
+      <h3> {{ album.album_name }}</h3>
+    </div>
+    <div class="col-md-4 offset-md-4">
+      <a type="button" href="/album/{{ album.album_id }}" class="btn btn-outline-success" >View Album</a>
+      <a type="button" href="/admin/album/delete/{{ album.album_id }}" class="btn btn-outline-danger" >Delete</a>
+
+    </div>
+  </div>
+  </div>
+ {% endfor %}
+</div>
+{% endif %}
+</br>
+{% if users1 %}
+<div class="box" style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+  <div class="row">
+    <div class="col-md-4">
+  <h1>Users <h5><i>By username</i></h5> </h1>
+    </div>
+
+</div>
+ {% for user in users1 %}
+<div class="box" style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px ">
+  <div class="row">
+    <div class="col-md-4">
+      <h3> {{ user.username }}</h3>
+    </div>
+    <div class="col-md-4 offset-md-4">
+
+      {% if user.blacklist >= 2 %}
+        <a type="button" href="/admin/search/{{search}}/users/revoke/blacklist/{{ user.user_id }}"class="btn btn-outline-success" > Revoke </a>
+{% else %}
+      <a type="button" href="/admin/search/{{search}}/users/blacklist/{{ user.user_id }}"class="btn btn-outline-danger" >Blacklist</a>
+{% endif %}
+        <a type="button" href="/admin/search/{{search}}/users/delete/{{ user.user_id }}"class="btn btn-outline-danger" >Delete User</a>
+
+    </div>
+  </div>
+  </div>
+ {% endfor %}
+</div>
+{% endif %}
+</br>
+{% if users2 %}
+<div class="box" style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+  <div class="row">
+    <div class="col-md-4">
+  <h1>Users <h5><i>By first or last name</i></h5> </h1>
+    </div>
+
+</div>
+ {% for user in users2 %}
+<div class="box" style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px ">
+  <div class="row">
+    <div class="col-md-4">
+      <h3> {{ user.first_name }} {{ user.last_name }}</h3>
+    </div>
+    <div class="col-md-4 offset-md-4">
+
+      {% if user.blacklist >= 2 %}
+        <a type="button" href="/admin/search/{{search}}/users/revoke/blacklist/{{ user.user_id }}"class="btn btn-outline-success" > Revoke </a>
+{% else %}
+      <a type="button" href="/admin/search/{{search}}/users/blacklist/{{ user.user_id }}"class="btn btn-outline-danger" >Blacklist</a>
+{% endif %}
+        <a type="button" href="/admin/search/{{search}}/users/delete/{{ user.user_id }}"class="btn btn-outline-danger" >Delete User</a>
+
+    </div>
+  </div>
+  </div>
+ {% endfor %}
+</div>
+{% endif %}
+</body>
+</html>

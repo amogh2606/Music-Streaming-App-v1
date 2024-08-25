@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <title>Song</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    {% if user!= 'admin'%}
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-4">Home</span>
+            </a>
+
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/creator/" class="nav-link" aria-current="page">Creator Account</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">|</a></li>
+                <li class="nav-item"><a href="/user" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">|</a></li>
+                <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+
+            </ul>
+            {% elif user=='admin' %}
+        <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Administrator</span>
+      </a>
+
+
+
+      <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/admin/creators" class="btn btn-outline-primary" aria-current="page">Creators</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+          <li class="nav-item"><a href="/admin/users" class="btn btn-outline-primary" aria-current="page">Users</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/dashboard" class="btn btn-outline-primary" aria-current="page">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/tracks" class="btn btn-outline-primary">Tracks</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/logout" class="btn btn-danger">Logout</a></li>
+
+      </ul>
+{% endif %}
+        </header>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="container">
+    <div class="box" align="center"
+         style="width: 900px; height: auto; border: 2px solid black; padding: 10px; border-radius: 20px; background-color: #F9F0FC">
+
+        <div class="row">
+            <div class="col-md-4">
+                <h1>{{ data['song_name'] }}</h1>
+                <h4>{{ data['singer'] }} | {{ data['year'] }} | {{ data['genre']}}</h4>
+                <h5>Rating : {{ rating }}</h5>
+            </div>
+{% if flag %}
+            <div class="col-md-4 offset-md-4">
+                <br/>
+                <form method="post">
+                    <label for="customRange3" class="form-label">Rate the song out of 5</label>
+                    <input type="range" class="form-range" min="0" max="5" step="1" id="customRange3" name="rating">
+                    <h5>0&emsp;&emsp;1 &emsp;&emsp;2 &emsp;&ensp;3 &emsp;&ensp; 4&emsp;&ensp;&ensp;5</h5>
+                    <button type="submit" class="btn btn-warning">&emsp;&emsp;Rate&emsp;&emsp;</button>
+                </form>
+            </div>
+ {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <a type="button" class="btn btn-outline-secondary" href="/song/{{ data.song_id }}/play">Play Song</a>
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="box" align="center"
+             style="width: 700px; height: auto; border: 2px solid black; padding: 10px; margin-bottom:75px; border-radius: 20px; background-color: #F9F0FC">
+
+            <h5>{{ data['song_lyrics'] }}</h5>
+
+        </div>
+    </div>
+</div>
+
+</div>
+{% if path %}
+<div class="sticky-bottom" align="center" id="audiocontrol">
+    <audio controls autoplay>
+        <source id="source" src="/{{ path }}" type="audio/mpeg">
+    </audio>
+{% endif %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</html>

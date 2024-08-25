@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <title>Creator Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+            </svg>
+            <span class="fs-4">Creator Account</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/upload/song" class="nav-link" aria-current="page">Upload Song</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">|</a></li>
+            <li class="nav-item"><a href="/home" class="nav-link">User Account</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">|</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+
+        </ul>
+    </header>
+</div>
+<div class="box"
+     style="border-radius: 20px;border: 2px solid black; padding-bottom: 30px;text-align: center;margin: 10px">
+    <h1>&emsp;Dashboard</h1>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box"
+                     style="border: 1px solid black; border-radius: 20px; background-color: mediumaquamarine; padding-top: 10px">
+                    <h3>Total Songs </h3>
+                    <h3> Uploaded</h3>
+                    <h1>{{ n }}</h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box"
+                     style="border: 1px solid black; border-radius: 20px; background-color: lightsalmon; padding-top: 10px;text-align: center">
+                    <h3>Average</h3>
+                    <h3> Rating&nbsp;</h3>
+                    <h1>{{ r }}</h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box"
+                     style="border: 1px solid black; border-radius: 20px; background-color: lightsteelblue ; padding-top: 10px; text-align: center">
+                    <h3>Total </h3>
+                    <h3> Albums</h3>
+                    <h1>{{ a }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+
+<div class="box"
+     style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Your Uploads</h1>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <a href='/upload/song' type="button" class="btn btn-outline-info" style="justify-content: end">Upload</a>
+        </div>
+    </div>
+    {% for song in songs %}
+    <div class="box"
+         style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px ">
+        <div class="row">
+            <div class="col-md-4">
+                <h3> {{ song.song_name }}</h3>
+            </div>
+            <div class="col-md-4 offset-md-4">
+                <a type="button" href="/song/{{ song.song_id }}" class="btn btn-outline-success">View Lyrics</a>
+                <a type="button" href="/creator/song/edit/{{ song.song_id }}" class="btn btn-outline-primary">Edit</a>
+                <a type="button" href="/creator/song/delete/{{ song.song_id }}"
+                   class="btn btn-outline-danger">Delete</a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</br>
+</br>
+</br>
+<div class="box"
+     style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin: 10px">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Your Albums</h1>
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <a href='/creator/create_album' type="button" class="btn btn-outline-info" style="justify-content: end">New
+                Album</a>
+        </div>
+    </div>
+    {% for album in albums %}
+    <div class="box"
+         style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px">
+        <div class="row">
+            <div class="col-md-4">
+                <h3> {{ album.album_name }}</h3>
+            </div>
+            <div class="col-md-4 offset-md-4">
+                <a type="button" href="/album/{{ album.album_id }}" class="btn btn-outline-success">View Album</a>
+                <a type="button" href="/creator/album/edit/{{ album.album_id }}"
+                   class="btn btn-outline-primary">Edit</a>
+                <a type="button" href="/creator/album/delete/{{ album.album_id }}"
+                   class="btn btn-outline-danger">Delete</a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

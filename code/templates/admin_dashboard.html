@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Administrator</span>
+      </a>
+                      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="post">
+            <span class="input-group-text" id="basic-addon1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+</svg>
+
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search" name="search">
+                 </span>
+        </form>
+
+      <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/admin/creators" class="btn btn-outline-primary" aria-current="page">Creators</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+          <li class="nav-item"><a href="/admin/users" class="btn btn-outline-primary" aria-current="page">Users</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/tracks" class="btn btn-outline-primary" aria-current="page">Tracks</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/albums" class="btn btn-outline-primary">Albums</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/logout" class="btn btn-danger">Logout</a></li>
+
+      </ul>
+    </header>
+  </div>
+<br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="box" style="border-radius: 20px;border: 1px solid black;text-align: center;padding-bottom: 50px;padding-top: 50px; margin-bottom: 50px; background-color: burlywood">
+                    <h3>Normal Users</h3>
+                    <h3>{{ normal_user }}</h3>
+                </div>
+            </div>
+            <div class="col-md-3 offset-md-1">
+                <h3>App Performance</h3>
+            <div class="col-md-2">
+                <div class="box" style="border: 1px solid black;width: 250px; text-align: center; padding-bottom: 20px;padding-top: 20px; background-color: burlywood">
+                    <h3>Tracks</h3>
+                    <h4>{{ number_of_songs }}</h4>
+                </div>
+            </div>
+            </div>
+                <div class="col-md-3">
+                    <h3>&ensp;</h3>
+                <div class="box" style="border: 1px solid black;width: 250px;text-align: center; padding-bottom: 20px;padding-top: 20px; background-color: burlywood">
+                    <h3>Albums</h3>
+                    <h4>{{ number_of_albums }}</h4>
+                </div>
+                </div>
+            <div class="col-md-2">
+                <h3>&ensp;</h3>
+                <div class="box" style="border: 1px solid black;width: 250px;text-align: center; padding-bottom: 20px;padding-top: 20px; background-color: burlywood">
+                    <h3>Genre</h3>
+                    <h4>{{ number_of_genre }}</h4>
+                </div>
+            </div>
+            </div>
+
+        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box" style="border-radius: 20px;border: 1px solid black;text-align: center;padding-bottom: 50px;padding-top: 50px; background-color: burlywood">
+                <h3>Creators</h3>
+                <h3>{{ creators }}</h3>
+        </div>
+    </div>
+        <div class="col-sm-2">
+        <h1>&ensp;&ensp;<u>Metrics</u></h1>
+            <img src="/{{ path_of_song_vs_rating }}" alt="plot" >
+        </div>
+            <div class="col-sm-2 offset-sm-2">
+                <h1>&ensp;</h1>
+            <img src="/{{ path_of_genre_vs_rating }}" alt="plot" >
+        </div>
+    </div>
+
+            <div class="row">
+           <div class="col-sm-2 offset-md-3">
+                <h1>&ensp;</h1>
+            <img src="/{{ path_of_user_vs_uploads }}" alt="plot" >
+        </div>
+
+           <div class="col-sm-2 offset-sm-2">
+                <h1>&ensp;</h1>
+            <img src="/{{ path_of_user_vs_playlist }}" alt="plot" >
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+
+</body>
+</html>

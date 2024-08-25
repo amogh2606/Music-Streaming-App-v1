@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/admin/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Administrator</span>
+      </a>
+
+      <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/admin/dashboard" class="btn btn-outline-primary" aria-current="page">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+          <li class="nav-item"><a href="/admin/users" class="btn btn-outline-primary" aria-current="page">Users</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/tracks" class="btn btn-outline-primary" aria-current="page">Tracks</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/albums" class="btn btn-outline-primary">Albums</a></li>
+          <li class="nav-item"><a class="nav-link">|</a></li>
+        <li class="nav-item"><a href="/admin/logout" class="btn btn-danger">Logout</a></li>
+
+      </ul>
+    </header>
+  </div>
+<br/>
+<div class="box" style="border-radius: 20px; border: 2px solid black;padding-top: 20px;padding-left: 10px;padding-bottom: 10px;padding-right: 10px;margin-bottom: 10px">
+  <div class="row">
+    <div class="col-md-4">
+  <h1>Creators</h1>
+    </div>
+      <h5>Note: <i>This will only blacklist them as creator and not a user </i></h5>
+  <div class="col-md-4 offset-md-4">
+
+</div>
+</div>
+ {% for creator in creators %}
+<div class="box" style="border-radius: 20px; background-color: #EADDD7; padding-left:10px;border: 2px solid black;padding-top: 10px;padding-bottom: 10px ; margin-bottom: 10px">
+  <div class="row">
+    <div class="col-md-4">
+      <h3> {{ creator.username }}</h3>
+    </div>
+    <div class="col-md-4 offset-md-4">
+{% if creator.blacklist >= 1 %}
+        <a type="button" href="/admin/creators/revoke/blacklist/{{ creator.user_id }}"class="btn btn-outline-success" > Revoke </a>
+ {% else %}
+      <a type="button" href="/admin/creators/blacklist/{{ creator.user_id }}"class="btn btn-outline-danger" >Blacklist</a>
+{% endif %}
+    </div>
+  </div>
+  </div>
+ {% endfor %}
+</div>
